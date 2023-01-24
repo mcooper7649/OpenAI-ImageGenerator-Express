@@ -1,9 +1,8 @@
 const { Configuration, OpenAIApi } = require('openai');
 
 const configuration = new Configuration({
-  apiKey: process.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
-
 const openai = new OpenAIApi(configuration);
 
 const generateImage = async (req, res) => {
@@ -15,7 +14,7 @@ const generateImage = async (req, res) => {
   try {
     const response = await openai.createImage({
       prompt,
-      n: 1,
+      n: 3,
       size: imageSize,
     });
 
@@ -40,6 +39,4 @@ const generateImage = async (req, res) => {
   }
 };
 
-module.exports = {
-  generateImage,
-};
+module.exports = { generateImage };
